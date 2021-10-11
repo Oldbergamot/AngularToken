@@ -15,4 +15,10 @@ export class AuthService {
       password
     })
   }
+  signin(username : string, password : string) {
+    return this.http.post(environment.serverAddr + 'register', {  // concaténation de l'adresse du serveur avec login et envoi des string username et password
+      username,
+      password
+    })
+  }
 }

@@ -8,7 +8,7 @@ export class TokenStorageService {
   constructor() { }
 
   public saveToken(token : string){
-    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('token', token.replace('Bearer ', ''));
   }
 
   public getToken() {

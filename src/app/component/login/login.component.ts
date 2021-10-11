@@ -27,29 +27,18 @@ export class LoginComponent implements OnInit {
                   )
               };
 
-  
+  ngOnInit(): void {  }
 
-  ngOnInit(): void {
-
-
-}
-submit() {
-  if(this.userForm.valid) {
-    return;
+  submit() {
+    if(!this.userForm.valid) {
+      return;
+    }
+    const formVal = this.userForm.value;
+    
+    this.authService.login(formVal.username, formVal.password)
+        .subscribe((data : any) => {
+          console.log(data);
+          this.tokenStorageService.saveToken(data.token.replace('Bearer ',''));
+        })
   }
-  const formVal = this.userForm.value;
-
-  this.authService.login(formVal.username, formVal.password)
-      .subscribe((data : any) => {
-        console.log(data);
-      })
 }
-}
-
-
-// this.authService.login('admin','pass')
-// .subscribe((data: any) => {
-//   this.tokenStorageService.saveToken(data.token);
-//   console.log(this.tokenStorageService.getToken());
-//   this.tokenStorageService.saveUser(data);
-// });
